@@ -1,0 +1,117 @@
+# ==========================
+# Общие игнорируемые файлы
+# ==========================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Логи и временные файлы
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Переменные окружения и секреты
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.key
+*.pem
+*.crt
+*.pfx
+*.p12
+
+# Документация / заметки разработчика (если храните в корне)
+TODO.md
+notes.md
+
+
+# ==========================
+# Backend (Node.js + Express)
+# ==========================
+/backend/node_modules/
+/backend/dist/
+/backend/.next/
+/backend/build/
+
+# Node.js тесты и отчеты
+/backend/coverage/
+/backend/.nyc_output/
+
+# IDE (Node.js)
+/backend/.idea/
+/backend/*.iml
+/backend/.vscode/
+/backend/.classpath
+/backend/.project
+/backend/.settings/
+
+
+# ==========================
+# Frontend (Flutter)
+# ==========================
+/frontend/.dart_tool/
+/frontend/build/
+/frontend/ios/Flutter/Flutter.framework
+/frontend/android/app/release/
+/frontend/android/app/debug/
+/frontend/windows/flutter/ephemeral/
+/frontend/macos/Flutter/ephemeral/
+/frontend/linux/flutter/ephemeral/
+
+# Пакеты Flutter
+/frontend/pubspec.lock
+# Раскомментируйте, если НЕ хотите фиксировать pubspec.lock в репозитории.
+# Обычно для библиотек его фиксируют, а для приложений — тоже часто фиксируют, 
+# чтобы версии зависимостей были стабильны. Если хотите игнорировать — раскомментируйте строку выше.
+
+# IDE (Flutter)
+/frontend/.idea/
+/frontend/*.iml
+/frontend/.vscode/
+/frontend/.classpath
+/frontend/.project
+/frontend/.settings/
+
+# Сертификаты и ключи для Flutter платформ
+/frontend/android/key.properties
+/frontend/android/app/*.keystore
+/frontend/android/app/*.jks
+/frontend/ios/Runner/Debug.xcconfig
+/frontend/ios/Runner/Release.xcconfig
+
+
+# ==========================
+# База данных и Docker
+# ==========================
+# Игнорируем реальные данные БД, но НЕ игнорируем миграции и сидеры
+/backend/data/
+*.sql.dump
+*.bak
+
+# Docker compose override для локальной разработки (если есть)
+docker-compose.override.yml
+
+# Артефакты Docker
+**/Dockerfile.dev
+**/Dockerfile.debug
+
+
+# ==========================
+# Прочее
+# ==========================
+# Папки для артефактов сборки CI/CD
+.github/workflows/artifacts/
+.gitlab-ci/artifacts/
+
+# Локальные заметки и черновики
+*.tmp
+*.temp
