@@ -1,0 +1,56 @@
+{
+  "folders": [
+    {
+      "path": ".",
+      "name": "CarPlanner Root"
+    }
+  ],
+  "settings": {
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "files.exclude": {
+      "**/.git": true,
+      "**/node_modules": true,
+      "**/.dart_tool": true,
+      "**/build": true,
+      "**/*.log": true
+    },
+    "workbench.colorCustomizations": {
+      "activityBar.background": "#2d333b",
+      "titleBar.activeBackground": "#373d46",
+      "titleBar.activeForeground": "#ffffff"
+    },
+
+    // --- НАСТРОЙКИ ДЛЯ BACKEND (Node.js) ---
+        "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit"
+      }
+    },
+    "[typescript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit"
+      }
+    },
+    "eslint.validate": ["javascript", "typescript"],
+    
+    // --- НАСТРОЙКИ ДЛЯ FRONTEND (Flutter) ---
+        "[dart]": {
+      "editor.formatOnSave": true,
+      "editor.rulers": [120],
+      "editor.defaultFormatter": "Dart-Code.dart-code"
+    },
+    "dart.lineLength": 120
+  },
+  "extensions": {
+    "recommendations": [
+      "Dart-Code.dart-code",
+      "Dart-Code.flutter",
+      "dbaeumer.vscode-eslint",
+      "esbenp.prettier-vscode",
+      "ms-azuretools.vscode-docker",
+      "ms-vscode.vscode-nodejs-extension-pack"
+    ]
+  }
+}

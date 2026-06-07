@@ -1,0 +1,32 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "🚀 Start Full Stack (Docker)",
+      "type": "shell",
+      "command": "docker compose up --build",
+      "options": {
+        "cwd": "${workspaceFolder}" 
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "📦 Install Backend Deps",
+      "type": "shell",
+      "command": "npm install",
+      "options": {
+        "cwd": "${workspaceFolder}/backend" 
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "📱 Run Flutter App",
+      "type": "shell",
+      "command": "flutter run",
+      "options": {
+        "cwd": "${workspaceFolder}/frontend" 
+      },
+      "problemMatcher": []
+    }
+  ]
+}

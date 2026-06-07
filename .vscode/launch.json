@@ -1,0 +1,20 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Backend (Node.js)",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceFolder}/backend", 
+      "program": "${workspaceFolder}/backend/server.js", 
+      "console": "integratedTerminal"
+    },
+    {
+      "name": "Debug Flutter App",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug",
+      "cwd": "${workspaceFolder}/frontend" 
+    }
+  ]
+}
