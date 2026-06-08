@@ -1,0 +1,19 @@
+# Игнорируем локальные node_modules (в контейнере они будут свои)
+**/node_modules
+
+# Игнорируем логи и временные файлы
+*.log
+.DS_Store
+Thumbs.db
+
+# Игнорируем файлы IDE
+.vscode
+.idea
+
+# Игнорируем git
+.git
+
+# Специфично для Flutter
+**/build
+**/.dart_tool
+**/pubspec.lock
