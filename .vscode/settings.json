@@ -1,33 +1,3 @@
 {
-  "editor.formatOnSave": true,
   
-  // --- НАСТРОЙКИ ДЛЯ BACKEND (Node.js) ---
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": "explicit"
-    }
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "editor.codeActionsOnSave": {
-      "source.fixAll.eslint": "explicit"
-    }
-  },
-  "eslint.validate": ["javascript", "typescript"],
-  "files.associations": {
-    ".env": "properties"
-  },
-
-  // --- НАСТРОЙКИ ДЛЯ FRONTEND (Flutter/Dart) ---
-  // Эти правила сработают ТОЛЬКО для файлов .dart
-  "[dart]": {
-    "editor.formatOnSave": true,
-    "editor.rulers": [120],
-    "editor.defaultFormatter": "Dart-Code.dart-code"
-  },
-  "dart.lineLength": 120,
-  "files.associations": {
-    ".flutter-plugins": "plaintext"
-  }
 }

@@ -18,30 +18,8 @@
       "activityBar.background": "#2d333b",
       "titleBar.activeBackground": "#373d46",
       "titleBar.activeForeground": "#ffffff"
-    },
-
-    // --- НАСТРОЙКИ ДЛЯ BACKEND (Node.js) ---
-        "[javascript]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode",
-      "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": "explicit"
-      }
-    },
-    "[typescript]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode",
-      "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": "explicit"
-      }
-    },
-    "eslint.validate": ["javascript", "typescript"],
-    
-    // --- НАСТРОЙКИ ДЛЯ FRONTEND (Flutter) ---
-        "[dart]": {
-      "editor.formatOnSave": true,
-      "editor.rulers": [120],
-      "editor.defaultFormatter": "Dart-Code.dart-code"
-    },
-    "dart.lineLength": 120
+    }
+    // ВАЖНО: Никаких [javascript], [dart], eslint.validate и files.associations здесь быть не должно!
   },
   "extensions": {
     "recommendations": [
