@@ -1,50 +1,50 @@
 services:
-  # База данных PostgreSQL
   db:
     image: postgres:15-alpine
     container_name: carplanner-db
     restart: unless-stopped
     environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: carplannerdb
-    ports:
-      - "5432:5432" # Пробрасываем порт, чтобы можно было подключиться извне (например, из DBeaver или VS Code)
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     volumes:
-      - pgdata:/var/lib/postgresql/data # Данные сохраняются даже если контейнер удален
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U user -d carplannerdb"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
       interval: 5s
       timeout: 5s
       retries: 5
-
-  # Бэкенд (Node.js)
+    networks:
+      - carplanner-network
   backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
+    build: ./backend
     container_name: carplanner-backend
+    command: npm run dev
     restart: unless-stopped
     ports:
       - "3000:3000"
     environment:
-      - DATABASE_URL
-      - NODE_ENV  
+      # Явно передаем переменные из корневого .env
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      # Формируем URL прямо здесь. Docker подставит значения из корневого .env
+      DATABASE_URL: "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}"
+      PORT: "3000"
     depends_on:
       db:
-        condition: service_healthy # Ждем, пока база полностью готова принимать соединения
+        condition: service_healthy
     volumes:
-      # Горячая перезагрузка кода (Live Reload)
-      # Любые изменения в backend/ на твоем ПК сразу появятся в контейнере
       - ./backend:/app
-      # Важно: node_modules внутри контейнера НЕ перезаписывается, так как мы не мапим эту папку явно.
-      # Но из-за COPY . . в Dockerfile и volume ./backend:/app, node_modules может затереться, 
-      # если они есть у тебя на ПК. 
-      # РЕШЕНИЕ: Убедись, что в .dockerignore есть **/node_modules. 
-      # Тогда при маппинге volume папка node_modules из контейнера сохранится.
-    command: npm run dev 
-    # ^ Используем команду dev, если в package.json есть скрипт "dev": "nodemon server.js"
-    # Если нет, замени на: command: node server.js
+      - /app/node_modules
+    networks:
+      - carplanner-network
 
 volumes:
   pgdata:
+
+networks:
+  carplanner-network:
+    driver: bridge
