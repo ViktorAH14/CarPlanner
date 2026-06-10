@@ -4,7 +4,7 @@
   "description": "Backend for CarPlanner expense tracker with PostgreSQL",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon src/server.js",
+    "dev": "nodemon --inspect=0.0.0.0:9229 src/server.js",
     "start": "node src/server.js"
   },
   "keywords": [

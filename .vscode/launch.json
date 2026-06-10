@@ -2,19 +2,22 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Debug Backend (Node.js)",
+      "name": "🐳 Attach to Backend (Docker)",
       "type": "node",
-      "request": "launch",
-      "cwd": "${workspaceFolder}/backend", 
-      "program": "${workspaceFolder}/backend/server.js", 
-      "console": "integratedTerminal"
+      "request": "attach",
+      "restart": true,
+      "port": 9229,
+      "address": "localhost",
+      "localRoot": "${workspaceFolder}/backend",
+      "remoteRoot": "/app",
+      "skipFiles": ["<node_internals>/**"]
     },
     {
       "name": "Debug Flutter App",
       "request": "launch",
       "type": "dart",
       "flutterMode": "debug",
-      "cwd": "${workspaceFolder}/frontend" 
+      "cwd": "${workspaceFolder}/frontend"
     }
   ]
 }

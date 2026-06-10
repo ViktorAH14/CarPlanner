@@ -25,6 +25,7 @@ services:
     restart: unless-stopped
     ports:
       - "3000:3000"
+      - "9229:9229"
     environment:
       # Явно передаем переменные из корневого .env
       POSTGRES_USER: ${POSTGRES_USER}
