@@ -1,28 +1,24 @@
 const { Sequelize } = require('sequelize');
 
-const sequelize = new Sequelize(process.env.DATABASE_URL, {
+const dbUrl =
+  process.env.NODE_ENV === 'test'
+    ? process.env.TEST_DATABASE_URL
+    : process.env.DATABASE_URL;
+
+const sequelize = new Sequelize(dbUrl, {
   dialect: 'postgres',
-  logging: console.log, // Видим SQL
+  logging: process.env.NODE_ENV !== 'test' ? console.log : false,
   pool: { max: 5, min: 0, acquire: 30000, idle: 10000 },
 });
 
 const testConnection = async () => {
   try {
-    // 1. Сначала синхронизируем модели (создадим таблицы, если их нет)
-    await sequelize.sync({ force: false }); // force: false = создать только если нет
-
-    // 2. Потом проверяем подключение (теперь таблица точно есть)
+    await sequelize.sync({ force: false });
     await sequelize.authenticate();
-
-    console.log('✅ Модели синхронизированы и подключение успешно!');
-
-    if (process.env.DATABASE_URL) {
-      const urlParts = new URL(process.env.DATABASE_URL);
-      console.log(`🗄 База: ${urlParts.pathname.substring(1)}`);
-    }
+    console.log('✅ Подключение к БД успешно!');
   } catch (error) {
-    console.error('❌ Критическая ошибка:', error.message);
-    throw error; // Важно пробросить ошибку, чтобы сервер упал, если БД не готова
+    console.error('❌ Ошибка подключения:', error.message);
+    throw error;
   }
 };
 

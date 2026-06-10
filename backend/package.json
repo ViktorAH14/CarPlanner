@@ -5,6 +5,7 @@
   "main": "server.js",
   "scripts": {
     "dev": "nodemon --inspect=0.0.0.0:9229 src/server.js",
+    "test": "NODE_ENV=test DATABASE_URL=postgresql://postgres:postgres@db:5432/carplanner_db TEST_DATABASE_URL=postgresql://postgres:postgres@db:5432/carplanner_test_db JWT_SECRET=test_secret_key npm run jest",
     "start": "node src/server.js"
   },
   "keywords": [
@@ -28,10 +29,15 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@types/jest": "^30.0.0",
+    "@types/supertest": "^7.2.0",
     "eslint": "^10.4.1",
     "eslint-config-prettier": "^10.1.8",
     "globals": "^17.6.0",
+    "jest": "^30.4.2",
     "nodemon": "^3.1.14",
-    "prettier": "^3.8.4"
+    "prettier": "^3.8.4",
+    "supertest": "^7.2.2",
+    "ts-node": "^10.9.2"
   }
 }

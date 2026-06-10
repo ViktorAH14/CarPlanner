@@ -6,8 +6,14 @@
       "type": "shell",
       "command": "docker compose up --build",
       "options": {
-        "cwd": "${workspaceFolder}" 
+        "cwd": "${workspaceFolder}"
       },
+      "problemMatcher": []
+    },
+    {
+      "label": "Run Backend Tests",
+      "type": "shell",
+      "command": "docker compose run --rm backend npm run test",
       "problemMatcher": []
     },
     {
@@ -15,7 +21,7 @@
       "type": "shell",
       "command": "npm install",
       "options": {
-        "cwd": "${workspaceFolder}/backend" 
+        "cwd": "${workspaceFolder}/backend"
       },
       "problemMatcher": []
     },
@@ -24,7 +30,7 @@
       "type": "shell",
       "command": "flutter run",
       "options": {
-        "cwd": "${workspaceFolder}/frontend" 
+        "cwd": "${workspaceFolder}/frontend"
       },
       "problemMatcher": []
     }
