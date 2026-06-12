@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "dev": "nodemon --inspect=0.0.0.0:9229 src/server.js",
-    "test": "NODE_ENV=test DATABASE_URL=postgresql://postgres:postgres@db:5432/carplanner_db TEST_DATABASE_URL=postgresql://postgres:postgres@db:5432/carplanner_test_db JWT_SECRET=test_secret_key npm run jest",
+    "test": "NODE_ENV=test DATABASE_URL=postgresql://postgres:postgres@db:5432/carplanner_db TEST_DATABASE_URL=postgresql://postgres:postgres@db:5432/carplanner_test_db JWT_SECRET=dummy_secret jest",
     "start": "node src/server.js"
   },
   "keywords": [

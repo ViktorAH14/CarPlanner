@@ -2,8 +2,8 @@
   "folders": [
     {
       "path": ".",
-      "name": "CarPlanner Root"
-    }
+      "name": "CarPlanner Root",
+    },
   ],
   "settings": {
     "terminal.integrated.defaultProfile.linux": "zsh",
@@ -12,14 +12,13 @@
       "**/node_modules": true,
       "**/.dart_tool": true,
       "**/build": true,
-      "**/*.log": true
+      "**/*.log": true,
     },
     "workbench.colorCustomizations": {
       "activityBar.background": "#2d333b",
       "titleBar.activeBackground": "#373d46",
-      "titleBar.activeForeground": "#ffffff"
-    }
-    // ВАЖНО: Никаких [javascript], [dart], eslint.validate и files.associations здесь быть не должно!
+      "titleBar.activeForeground": "#ffffff",
+    },
   },
   "extensions": {
     "recommendations": [
@@ -28,7 +27,7 @@
       "dbaeumer.vscode-eslint",
       "esbenp.prettier-vscode",
       "ms-azuretools.vscode-docker",
-      "ms-vscode.vscode-nodejs-extension-pack"
-    ]
-  }
+      "ms-vscode.vscode-nodejs-extension-pack",
+    ],
+  },
 }

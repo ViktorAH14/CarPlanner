@@ -1,24 +1,22 @@
-const authService = require("../services/auth.service");
+const authService = require('../services/auth.service');
 
 exports.register = async (req, res) => {
   try {
     const { email, password, firstName, lastName } = req.body;
 
-    // Простая валидация на уровне контроллера (в будущем перенесем в middleware)
     if (!email || !password) {
-      return res.status(400).json({ error: "Email и пароль обязательны" });
+      return res.status(400).json({ error: 'Email и пароль обязательны' });
     }
 
     const user = await authService.registerUser(
       email,
       password,
       firstName,
-      lastName,
+      lastName
     );
 
-    // Возвращаем только нужные данные, скрывая пароль
     return res.status(201).json({
-      message: "Пользователь успешно зарегистрирован",
+      message: 'Пользователь успешно зарегистрирован',
       data: {
         id: user.id,
         email: user.email,
@@ -27,7 +25,38 @@ exports.register = async (req, res) => {
       },
     });
   } catch (error) {
-    console.error(error.message);
-    return res.status(500).json({ error: error.message });
+    if (error.message.includes('уже существует')) {
+      return res
+        .status(409)
+        .json({ error: 'Пользователь с таким email уже существует' });
+    }
+
+    console.error(error);
+    return res.status(500).json({ error: 'Ошибка сервера при регистрации' });
+  }
+};
+
+exports.login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res
+        .status(400)
+        .json({ error: 'Email и пароль обязательны для входа' });
+    }
+
+    const result = await authService.loginUser(email, password);
+
+    return res.json({
+      message: 'Успешный вход',
+      data: result,
+    });
+  } catch (error) {
+    if (error.message === 'Неверный email или пароль') {
+      return res.status(401).json({ error: 'Неверный email или пароль' });
+    }
+    console.error(error);
+    return res.status(500).json({ error: 'Ошибка сервера при входе' });
   }
 };
