@@ -1,5 +1,5 @@
 # ==========================
-# Общие игнорируемые файлы
+# General Ignored Files
 # ==========================
 .DS_Store
 .DS_Store?
@@ -10,14 +10,15 @@ ehthumbs.db
 Thumbs.db
 desktop.ini
 
-# Логи и временные файлы
+# Logs and temporary files
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# Переменные окружения и секреты
+# Environment variables and secrets
+# NEVER commit .env files or private keys to version control
 .env
 .env.local
 .env.development.local
@@ -29,7 +30,7 @@ yarn-error.log*
 *.pfx
 *.p12
 
-# Документация / заметки разработчика (если храните в корне)
+# Documentation / Developer notes (if stored in root)
 TODO.md
 notes.md
 
@@ -42,11 +43,11 @@ notes.md
 /backend/.next/
 /backend/build/
 
-# Node.js тесты и отчеты
+# Node.js test coverage reports
 /backend/coverage/
 /backend/.nyc_output/
 
-# IDE (Node.js)
+# IDE configurations (Node.js)
 /backend/.idea/
 /backend/*.iml
 /backend/.vscode/
@@ -67,10 +68,10 @@ notes.md
 /frontend/macos/Flutter/ephemeral/
 /frontend/linux/flutter/ephemeral/
 
-# Пакеты Flutter
+# Flutter package lock file
 /frontend/pubspec.lock
 
-# IDE (Flutter)
+# IDE configurations (Flutter)
 /frontend/.idea/
 /frontend/*.iml
 /frontend/.vscode/
@@ -78,7 +79,7 @@ notes.md
 /frontend/.project
 /frontend/.settings/
 
-# Сертификаты и ключи для Flutter платформ
+# Platform-specific certificates and keys for Flutter
 /frontend/android/key.properties
 /frontend/android/app/*.keystore
 /frontend/android/app/*.jks
@@ -87,28 +88,28 @@ notes.md
 
 
 # ==========================
-# База данных и Docker
+# Database and Docker
 # ==========================
-# Игнорируем реальные данные БД, но НЕ игнорируем миграции и сидеры
+# Ignore actual database data files, but DO NOT ignore migrations or seeders
 /backend/data/
 *.sql.dump
 *.bak
 
-# Docker compose override для локальной разработки (если есть)
+# Docker compose override for local development (keeps local configs out of repo)
 docker-compose.override.yml
 
-# Артефакты Docker
+# Docker build artifacts
 **/Dockerfile.dev
 **/Dockerfile.debug
 
 
 # ==========================
-# Прочее
+# Miscellaneous
 # ==========================
-# Папки для артефактов сборки CI/CD
+# CI/CD build artifact folders
 .github/workflows/artifacts/
 .gitlab-ci/artifacts/
 
-# Локальные заметки и черновики
+# Local temporary files and drafts
 *.tmp
 *.temp
