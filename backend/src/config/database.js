@@ -28,6 +28,7 @@ if (!dbUrl) {
     '❌ Configuration Error: DATABASE_URL or TEST_DATABASE_URL environment variable is missing'
   );
 }
+
 /**
  * Creates and configures the Sequelize instance for PostgreSQL.
  *

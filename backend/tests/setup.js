@@ -1,43 +1,37 @@
 /**
- * Test Environment Setup & Teardown
- * Configures the database connection for the test suite lifecycle.
- *
- * This file handles the global setup (beforeAll) and cleanup (afterAll) hooks
- * for all integration tests. It ensures a clean database state before tests run
- * and properly closes the connection afterwards.
- *
- * Strategy:
- * - beforeAll: Syncs the database with { force: true }, dropping and recreating
- *   all tables. This guarantees a pristine environment for every test run.
- * - afterAll: Closes the Sequelize connection to prevent hanging processes.
+ * Global test setup for database initialization and cleanup.
+ * This file configures the test environment before all tests run.
  *
  * @module tests/setup
  */
 
 const { sequelize } = require('../src/config/database');
+const { log } = require('../src/utils/logger');
 
-/**
- * Executed once before all tests in the suite.
- * Initializes the test database by forcing a schema sync.
- *
- * ⚠️ WARNING: { force: true } drops all existing tables in the connected database.
- * Ensure DATABASE_URL points to a dedicated TEST database, never to production.
- */
+// Global setup for all tests
 beforeAll(async () => {
-  console.log('🧪 Preparing test database (dropping and recreating tables)...');
+  try {
+    log('🧪 Preparing test database (dropping and recreating tables)...');
 
-  // Force sync recreates the schema, ensuring tests start with a clean slate.
-  // In a real production scenario, never use { force: true }.
-  await sequelize.sync({ force: true });
+    // Check database connection before synchronization
+    await sequelize.authenticate();
+    log('✅ Database connection established successfully');
 
-  console.log('✅ Test tables ready!');
+    // Synchronize database schema with force=true to recreate tables
+    await sequelize.sync({ force: true });
+    log('✅ Test tables ready!');
+  } catch (error) {
+    log(`❌ Database setup failed: ${error.message}`);
+    throw error;
+  }
 });
 
-/**
- * Executed once after all tests in the suite have completed.
- * Properly closes the database connection to allow the Node process to exit cleanly.
- */
+// Global teardown for all tests
 afterAll(async () => {
-  console.log('🏁 Tests finished. Closing database connection...');
-  await sequelize.close();
+  try {
+    log('🏁 Tests finished. Closing database connection...');
+    await sequelize.close();
+  } catch (error) {
+    log(`❌ Error closing database connection: ${error.message}`);
+  }
 });
