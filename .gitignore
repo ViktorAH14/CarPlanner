@@ -75,7 +75,7 @@ notes.md
 **/doc/api/
 **/ephemeral/
 **/Flutter.framework
-/build/
+**/build/
 /coverage/
 
 # =============================
