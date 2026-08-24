@@ -10,14 +10,25 @@ ehthumbs.db
 Thumbs.db
 desktop.ini
 
+# =========================
 # Logs and temporary files
+# =========================
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+*.class
+*.swp
+.build/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
 
+# =================================
 # Environment variables and secrets
+# =================================
 # NEVER commit .env files or private keys to version control
 .env
 .env.local
@@ -30,7 +41,9 @@ yarn-error.log*
 *.pfx
 *.p12
 
+# ===================================================
 # Documentation / Developer notes (if stored in root)
+# ===================================================
 TODO.md
 notes.md
 
@@ -47,45 +60,46 @@ notes.md
 /backend/coverage/
 /backend/.nyc_output/
 
-# IDE configurations (Node.js)
-/backend/.idea/
-/backend/*.iml
-/backend/.vscode/
-/backend/.classpath
-/backend/.project
-/backend/.settings/
-
-
 # ==========================
 # Frontend (Flutter)
 # ==========================
-/frontend/.dart_tool/
-/frontend/build/
-/frontend/ios/Flutter/Flutter.framework
-/frontend/android/app/release/
-/frontend/android/app/debug/
-/frontend/windows/flutter/ephemeral/
-/frontend/macos/Flutter/ephemeral/
-/frontend/linux/flutter/ephemeral/
+/frontend/.metadata
+/frontend/android/
+/frontend/linux/
+/frontend/windows/
+/frontend/web/
+.dart_tool/
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+**/doc/api/
+**/ephemeral/
+**/Flutter.framework
+**/build/
+/coverage/
 
-# Flutter package lock file
-/frontend/pubspec.lock
+# =============================
+# Symbolication and obfuscation
+# =============================
+*.symbols
+*.map.json
 
-# IDE configurations (Flutter)
-/frontend/.idea/
-/frontend/*.iml
-/frontend/.vscode/
-/frontend/.classpath
-/frontend/.project
-/frontend/.settings/
-
+# ===================================================
 # Platform-specific certificates and keys for Flutter
+# ===================================================
 /frontend/android/key.properties
-/frontend/android/app/*.keystore
-/frontend/android/app/*.jks
-/frontend/ios/Runner/Debug.xcconfig
-/frontend/ios/Runner/Release.xcconfig
+*.keystore
+*.jks
 
+# ==========================
+# IDE Configurations (All Projects)
+# ==========================
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+.vscode/
 
 # ==========================
 # Database and Docker
@@ -101,7 +115,6 @@ docker-compose.override.yml
 # Docker build artifacts
 **/Dockerfile.dev
 **/Dockerfile.debug
-
 
 # ==========================
 # Miscellaneous
