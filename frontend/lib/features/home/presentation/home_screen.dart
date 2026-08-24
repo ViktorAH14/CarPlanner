@@ -1,6 +1,38 @@
+/// The main home screen of the CarPlanner application.
+///
+/// This screen provides a high-level overview of vehicle-related metrics and
+/// serves as the entry point for adding new expense or maintenance records.
+///
+/// ## Features
+/// - Displays a descriptive header with the screen's purpose.
+/// - Shows three summary statistic cards:
+///   - **Fuel**: Tracks fuel-related entries.
+///   - **Service**: Tracks scheduled or performed services.
+///   - **Repair and other things**: Tracks repairs and miscellaneous costs.
+/// - Provides an "Add record" action button to initiate new entries.
+///
+/// ## Usage
+/// ```dart
+/// const HomeScreen()
+/// ```
+///
+/// Ensure this widget is used within a [MaterialApp] context so that
+/// [ScaffoldMessenger] and other Material components function correctly.
+///
+/// ## Dependencies
+/// - `package:flutter/material.dart`
+///
 import 'package:flutter/material.dart';
 
+/// A stateless widget representing the home screen of the CarPlanner app.
+///
+/// The screen is designed with a clean, responsive layout suitable for both
+/// mobile and tablet devices. It uses a vertically scrollable content area
+/// to accommodate varying screen sizes.
 class HomeScreen extends StatelessWidget {
+  /// Creates a [HomeScreen] widget.
+  ///
+  /// The [key] argument is provided for widget identification in the tree.
   const HomeScreen({super.key});
 
   @override
@@ -29,6 +61,9 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
+  /// Builds the header section of the home screen.
+  ///
+  /// Displays the main title and a brief description of the screen's functionality.
   Widget _buildHeader() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,6 +81,12 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
+  /// Builds a row of statistic cards displaying key metrics.
+  ///
+  /// Currently displays three cards for:
+  /// - Fuel entries
+  /// - Service entries
+  /// - Repair and other entries
   Widget _buildStatsCards() {
     // Removed unused variable 'cardHeight'
     return Row(
@@ -58,6 +99,11 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
+  /// Builds a single statistic card with a label and a value.
+  ///
+  /// [label] is the description of the metric (e.g., "Fuel").
+  /// [value] is the current count or value for that metric.
+  /// [baseColor] is the primary color used to tint the card background.
   Widget _buildStatCard(String label, String value, Color baseColor) {
     // Use withOpacity safely; for Material 3 it's still acceptable for backgrounds.
     // If you want to avoid any deprecation warnings entirely, you can use Color.fromRGBO instead.
@@ -93,6 +139,14 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
+  /// Builds the "Add record" action button.
+  ///
+  /// When pressed, displays a temporary snack bar indicating that the feature
+  /// is under development. This will be replaced with actual navigation logic
+  /// in future iterations.
+  ///
+  /// [context] is required to access the [ScaffoldMessenger] for showing
+  /// the snack bar.
   Widget _buildActionButton(BuildContext context) {
     return ElevatedButton.icon(
       onPressed: () {
