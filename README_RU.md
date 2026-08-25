@@ -13,6 +13,7 @@ CarPlanner помогает пользователям отслеживать з
 - **Фронтенд:** Flutter (Android, Windows, Linux)
 - **Бэкенд:** Node.js + Express + Sequelize
 - **База данных:** PostgreSQL
+- **Управление состоянием:** Riverpod (запланировано на следующую итерацию)
 - **Контейнеризация:** Docker & Docker Compose
 
 ---
@@ -35,6 +36,17 @@ CarPlanner/
 │   ├── tests/                  # Тесты API (Jest + Supertest)
 │   └── package.json
 ├── frontend/                   # Исходный код фронтенда (Flutter)
+│   ├── lib/
+│   │   ├── main.dart           # Точка входа в приложение (Flutter)
+│   │   ├── app.dart            # Корневой виджет и конфигурация приложения
+│   │   └── features/
+│   │       └── home/
+│   │           └── presentation/
+│   │               └── home_screen.dart   # Главный экран с карточками статистики и кнопкой действия
+│   ├── test/
+│   │   └── home_screen_test.dart          # Виджет‑тесты для HomeScreen
+│   ├── pubspec.yaml
+│   └── pubspec.lock
 ├── docker/
 │   └── postgres/
 │       └── init-test-db.sql    # Скрипт для создания carplanner_test_db при первой инициализации БД
@@ -44,6 +56,29 @@ CarPlanner/
 ├── README_RU.md                # Документация на русском языке
 └── LICENSE                     # Лицензия MIT
 ```
+
+---
+
+## 📱 Особенности фронтенда (текущее состояние)
+
+Фронтенд реализует чистую архитектуру на основе фич (feature‑based) с интерфейсом в стиле Material 3 и полным покрытием тестами главного дашборда.
+
+**Ключевые возможности**
+
+- **Главный экран** (lib/features/home/presentation/home_screen.dart): отображает заголовок, три карточки статистики («Топливо», «Сервис», «Ремонт и прочее») и кнопку «Добавить запись».
+- **Адаптивная вёрстка:** используется SingleChildScrollView для корректного отображения на экранах разных размеров.
+- **Дизайн Material 3:** применяется ThemeData(useMaterial3: true) с базовым цветом‑семенем для единого визуального стиля.
+- **Виджет‑тесты:** включены подробные тесты в test/home_screen_test.dart, проверяющие отрисовку UI и взаимодействие (например, отображение SnackBar при нажатии кнопки).
+- **Документация:** все публичные классы и методы содержат комментарии в формате DartDocs (///), совместимые с генерацией документации через dart doc.
+
+**Как сгенерировать документацию фронтенда**
+Из директории frontend/ выполните:
+
+```bash
+dart doc --open
+```
+
+Это создаст HTML‑документацию в папке CarPlanner/frontend/doc/api и откроет её в браузере.
 
 ---
 
@@ -80,7 +115,7 @@ docker compose up
 
 При первом запуске Postgres создаст базы `carplanner_db` и `carplanner_test_db` с помощью скрипта в `docker/postgres/`.
 
-### 3. Запуск тестов
+### 3. Запуск тестов бэкенда
 
 Тесты используют изолированную базу данных (`carplanner_test_db`). Строки подключения берутся из Docker Compose; скрипт тестов устанавливает только `NODE_ENV=test` и фиксированный `JWT_SECRET` для проверки middleware.
 
@@ -93,6 +128,19 @@ docker compose run --rm backend npm run test
 ### Автоперезагрузка
 
 В контейнере включён `nodemon`. Сохранение файлов в `backend/src` автоматически перезапускает сервер.
+
+---
+
+## 🧪 Тестирование фронтенда
+
+Чтобы запустить тесты Flutter для фронтенда:
+
+```bash
+cd frontend
+flutter test
+```
+
+Все виджет‑тесты (например, test/home_screen_test.dart) должны успешно проходить перед объединением любых изменений во фронтенде.
 
 ---
 
@@ -136,7 +184,11 @@ docker compose run --rm backend npm run test
 3. Внесите изменения и убедитесь, что все тесты проходят:
 
    ```bash
+   # Бэкенд
    docker compose run --rm backend npm run test
+
+   # Фронтенд
+   cd frontend && flutter test
    ```
 
 4. Отправьте Pull Request.
@@ -144,6 +196,8 @@ docker compose run --rm backend npm run test
 Пожалуйста, следуйте стилю сообщений коммитов [Conventional Commits](https://www.conventionalcommits.org/).
 
 **Лицензия:** MIT — подробности в файле [LICENSE](./LICENSE).
+
+Документация на английском: [README.md](./README.md).
 
 ---
 
