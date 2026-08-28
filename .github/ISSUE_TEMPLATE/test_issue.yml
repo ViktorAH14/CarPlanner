@@ -54,10 +54,10 @@ body:
     attributes:
       label: Impacted areas
       options:
-        - Unit tests
-        - Widget tests
-        - Integration/API tests
-        - Test data / fixtures
-        - CI pipeline
+        - label: Unit tests
+        - label: Widget tests
+        - label: Integration/API tests
+        - label: Test data / fixtures
+        - label: CI pipeline
     validations:
       required: true

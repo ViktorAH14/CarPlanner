@@ -47,12 +47,12 @@ body:
     attributes:
       label: Impacted areas
       options:
-        - Frontend (Flutter)
-        - Backend (Node.js)
-        - Database schema
-        - API routes
-        - Tests
-        - Documentation
+        - label: Frontend (Flutter)
+        - label: Backend (Node.js)
+        - label: Database schema
+        - label: API routes
+        - label: Tests
+        - label: Documentation
     validations:
       required: true
 
