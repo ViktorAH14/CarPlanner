@@ -1,0 +1,62 @@
+name: Task
+description: A concrete task to be completed (e.g., refactor, small fix, cleanup).
+title: "[Task]: "
+labels: ["help wanted"]
+body:
+  - type: input
+    id: task-title
+    attributes:
+      label: Task title
+      description: A short, actionable title.
+      placeholder: "Refactor /controllers/refueling.js to use services layer"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What exactly needs to be done and why? Mention any constraints.
+      placeholder: |
+        Currently, the refueling logic is directly in the controller.
+        Move business logic to services/refuelingService.js and update the controller to call it.
+        Keep existing API contract unchanged.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - Low
+        - Medium
+        - High
+        - Critical
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: affected-areas
+    attributes:
+      label: Affected areas
+      options:
+        - Frontend (Flutter)
+        - Backend (Node.js)
+        - Database schema
+        - Tests
+        - Documentation
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance criteria
+      description: How do we know the task is done? List concrete checks.
+      placeholder: |
+        - Controller no longer contains business logic.
+        - Service unit tests cover the new logic.
+        - Existing API tests still pass.
+    validations:
+      required: true

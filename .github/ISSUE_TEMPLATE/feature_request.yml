@@ -1,0 +1,66 @@
+name: Feature Request
+description: Suggest a new feature or enhancement for the CarPlanner project.
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: input
+    id: feature-name
+    attributes:
+      label: Feature name
+      description: Give a short and descriptive name for the feature.
+      placeholder: "Fuel consumption trend chart"
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem-statement
+    attributes:
+      label: Problem statement
+      description: Describe the problem this feature will solve or the user need it addresses.
+      placeholder: Users want to visualize how their fuel consumption changes over time to identify inefficiencies.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: Proposed solution
+      description: Outline how you envision the feature working. Include UI ideas, API changes, or data model updates if relevant.
+      placeholder: Add a new screen with a line chart showing weekly average fuel consumption. Backend should expose an endpoint like GET /api/stats/fuel-trend?period=week.
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance criteria
+      description: Define what success looks like. What conditions must be met for the feature to be considered complete?
+      placeholder: |
+        - The chart displays data for the last 12 weeks.
+        - Data is fetched from the new API endpoint.
+        - All widget tests for the chart screen pass.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: impacted-areas
+    attributes:
+      label: Impacted areas
+      options:
+        - Frontend (Flutter)
+        - Backend (Node.js)
+        - Database schema
+        - API routes
+        - Tests
+        - Documentation
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional-notes
+    attributes:
+      label: Additional notes
+      description: Any other details, links to discussions, or references that might be helpful.
+      placeholder: This feature was requested by multiple users in the community forum.
+    validations:
+      required: false
