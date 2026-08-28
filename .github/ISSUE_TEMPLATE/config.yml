@@ -1,0 +1,44 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Ask a question in Discussions
+    url: https://github.com/ViktorAH14/CarPlanner/discussions
+    about: Have a general question or want to discuss ideas? Use GitHub Discussions instead of an Issue.
+
+default_reviewers:
+  - ViktorAH14
+
+labels:
+  - name: bug
+    color: "#d73a4a"
+    description: "Something isn't working as expected."
+  - name: enhancement
+    color: "#0075ca"
+    description: "A new feature or improvement request."
+  - name: documentation
+    color: "#006b75"
+    description: "Issues related to project documentation."
+  - name: help wanted
+    color: "#3fb27f"
+    description: "We need help with this issue."
+  - name: good first issue
+    color: "#7057ff"
+    description: "Great for newcomers; has clear steps and scope."
+  - name: testing
+    color: "#cfd3d7"
+    description: "Related to tests, coverage, or test infrastructure."
+  - name: security
+    color: "#b40000"
+    description: "Security-related issue."
+
+limit_to_project: false
+
+restrict_to_contributing:
+  enabled: true
+  message: |
+    Before opening an issue, please read the CONTRIBUTING.md guide.
+    We ask contributors to first discuss larger ideas in Discussions or via an Issue template.
+
+require_label_to_close: true
+
+template_extensions:
+  enabled: true

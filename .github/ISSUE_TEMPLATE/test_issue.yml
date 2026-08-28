@@ -1,0 +1,63 @@
+name: Test Issue
+description: Report a failing test, flaky test, or missing test coverage.
+title: "[Test]: "
+labels: ["testing"]
+body:
+  - type: input
+    id: test-name
+    attributes:
+      label: Test name / file
+      description: Specify the exact test or file.
+      placeholder: "frontend/test/home_screen_test.dart - test 'shows SnackBar on button press'"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: issue-type
+    attributes:
+      label: Issue type
+      options:
+        - Test is failing
+        - Test is flaky (fails intermittently)
+        - Missing test for new feature
+        - Coverage is below target
+        - Test setup/teardown is fragile
+    validations:
+      required: true
+
+  - type: textarea
+    id: failure-details
+    attributes:
+      label: Failure details
+      description: Error message, stack trace, or conditions under which the test fails.
+      placeholder: |
+        Error: Expected widget to show SnackBar, but none was found.
+        Stack trace: ...
+        Fails only when running in CI, passes locally.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: How to reproduce
+      description: Commands and environment to reproduce the failure.
+      placeholder: |
+        cd frontend
+        flutter test test/home_screen_test.dart
+        Or: Run CI job #1234.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: impacted-areas
+    attributes:
+      label: Impacted areas
+      options:
+        - Unit tests
+        - Widget tests
+        - Integration/API tests
+        - Test data / fixtures
+        - CI pipeline
+    validations:
+      required: true

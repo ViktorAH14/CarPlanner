@@ -1,0 +1,44 @@
+name: Documentation Issue
+description: Report an issue with the project documentation or suggest improvements.
+title: "[Docs]: "
+labels: ["documentation"]
+body:
+  - type: input
+    id: affected-file
+    attributes:
+      label: Affected file
+      description: Specify which file or section of the documentation is affected.
+      placeholder: README.md, API documentation, etc.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: issue-type
+    attributes:
+      label: Issue type
+      options:
+        - Outdated information
+        - Missing information
+        - Incorrect information
+        - Poorly worded or confusing
+        - Formatting issue
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Explain the issue in detail and suggest how it could be improved.
+      placeholder: The section about running backend tests mentions an old command. The correct command is now `docker compose run --rm backend npm run test`.
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggested-fix
+    attributes:
+      label: Suggested fix
+      description: Provide the corrected text or describe the changes you would like to see.
+      placeholder: Replace the old command with the updated one and add a note about the change.
+    validations:
+      required: false

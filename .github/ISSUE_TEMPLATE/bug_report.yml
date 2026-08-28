@@ -1,0 +1,72 @@
+name: Bug Report
+description: Report a bug you encountered in the CarPlanner application.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Provide a clear and concise description of the problem. Include what you expected to happen and what actually happened.
+      placeholder: |
+        Example: When I click the "Add record" button on the Home Screen, the app crashes instead of showing the input form.
+        Expected: The input form should appear.
+        Actual: The app closes immediately.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to reproduce
+      description: List the exact steps to reproduce the issue. Include any relevant screenshots or logs if possible.
+      placeholder: |
+        1. Open the app.
+        2. Navigate to the Home Screen.
+        3. Click the "Add record" button.
+        4. Observe the crash.
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Specify the platform and environment where the issue occurred.
+      placeholder: Flutter (Android), Node.js (local Docker), etc.
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs-or-errors
+    attributes:
+      label: Relevant logs or errors
+      description: Paste any error messages, stack traces, or logs that might help diagnose the issue.
+      placeholder: |
+        [2026-08-28 10:00:00] ERROR: Unhandled exception in /api/protected/data
+        Error: Cannot read property 'id' of undefined
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: affected-components
+    attributes:
+      label: Affected components
+      options:
+        - Frontend (Flutter)
+        - Backend (Node.js)
+        - Database (PostgreSQL)
+        - Docker/Containerization
+        - Authentication/JWT
+        - Other (specify in description)
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: If applicable, specify the version of the app or commit hash.
+      placeholder: v1.0.0, abc1234
+    validations:
+      required: false

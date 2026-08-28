@@ -1,0 +1,62 @@
+name: Performance Issue
+description: Report a performance problem (slow API, UI lag, high DB load, etc.).
+title: "[Perf]: "
+labels: ["performance"]
+body:
+  - type: textarea
+    id: symptom
+    attributes:
+      label: Symptom
+      description: Describe the performance problem in measurable terms.
+      placeholder: |
+        The GET /api/protected/profile endpoint takes ~8 seconds to respond with a typical user dataset.
+        Expected response time: <200ms.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Exact steps and load conditions to observe the issue.
+      placeholder: |
+        1. Log in as user X.
+        2. Call GET /api/protected/profile 10 times in a row.
+        3. Observe average response time and DB query logs.
+    validations:
+      required: true
+
+  - type: textarea
+    id: metrics
+    attributes:
+      label: Metrics & observations
+      description: Include timings, CPU/memory usage, DB query plans, or screenshots if available.
+      placeholder: |
+        Average response time: 8.1s
+        Peak CPU: 95% on backend container
+        Query plan shows sequential scan on large table without index.
+    validations:
+      required: false
+
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Local Docker, staging, production, specific hardware, etc.
+      placeholder: "Local Docker (8GB RAM), PostgreSQL 15"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: suspected-area
+    attributes:
+      label: Suspected area
+      options:
+        - API endpoint logic
+        - Database query / indexing
+        - Serialization / JSON conversion
+        - Network latency
+        - Flutter rendering / heavy computation
+        - Other (specify in description)
+    validations:
+      required: true

@@ -1,0 +1,51 @@
+name: Security Issue
+description: For reporting security vulnerabilities. Do NOT include sensitive details in public comments.
+title: "[Security]: "
+labels: ["security"]
+body:
+  - type: input
+    id: vulnerability-type
+    attributes:
+      label: Vulnerability type
+      description: Type of issue (e.g., SQL injection, XSS, auth bypass).
+      placeholder: "JWT token leakage in logs"
+    validations:
+      required: true
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact
+      description: Who/what is affected and how severe the impact is.
+      placeholder: "Any authenticated user can see other users' data due to missing tenant check."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to reproduce (minimal)
+      description: Minimal steps to demonstrate the issue without sharing secrets.
+      placeholder: |
+        1. Authenticate as user A.
+        2. Send request to /api/protected/data with modified header.
+        3. Receive data belonging to user B.
+    validations:
+      required: true
+
+  - type: textarea
+    id: mitigations
+    attributes:
+      label: Current mitigations (if any)
+      description: Any temporary fixes or workarounds already applied.
+      placeholder: "Rate limiting added to endpoint as interim measure."
+    validations:
+      required: false
+
+  - type: markdown
+    id: security-notice
+    attributes:
+      value: |
+        ## ⚠️ Security Notice
+        Do not post credentials, tokens, or sensitive data in this issue.  
+        For critical vulnerabilities, contact the maintainer directly via email (see README) instead of opening a public issue.
