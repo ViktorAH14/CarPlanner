@@ -52,11 +52,11 @@ body:
     attributes:
       label: Suspected area
       options:
-        - API endpoint logic
-        - Database query / indexing
-        - Serialization / JSON conversion
-        - Network latency
-        - Flutter rendering / heavy computation
-        - Other (specify in description)
+        - label: API endpoint logic
+        - label: Database query / indexing
+        - label: Serialization / JSON conversion
+        - label: Network latency
+        - label: Flutter rendering / heavy computation
+        - label: Other (specify in description)
     validations:
       required: true

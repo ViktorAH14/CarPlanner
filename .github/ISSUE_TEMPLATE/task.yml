@@ -41,11 +41,11 @@ body:
     attributes:
       label: Affected areas
       options:
-        - Frontend (Flutter)
-        - Backend (Node.js)
-        - Database schema
-        - Tests
-        - Documentation
+        - label: Frontend (Flutter)
+        - label: Backend (Node.js)
+        - label: Database schema
+        - label: Tests
+        - label: Documentation
     validations:
       required: true
 

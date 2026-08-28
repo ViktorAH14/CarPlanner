@@ -53,12 +53,12 @@ body:
     attributes:
       label: Affected components
       options:
-        - Frontend (Flutter)
-        - Backend (Node.js)
-        - Database (PostgreSQL)
-        - Docker/Containerization
-        - Authentication/JWT
-        - Other (specify in description)
+        - label: Frontend (Flutter)
+        - label: Backend (Node.js)
+        - label: Database (PostgreSQL)
+        - label: Docker/Containerization
+        - label: Authentication/JWT
+        - label: Other (specify in description)
     validations:
       required: true
 
