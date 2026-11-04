@@ -201,4 +201,39 @@ Read this documentation in Russian: [README_RU.md](./README_RU.md)
 
 ---
 
+## 🎯 Project Management
+
+All project work is tracked on the CarPlanner Sprint Board: https://github.com/users/ViktorAH14/projects/4
+
+**Workflow**
+
+Items move through the following columns:
+
+| Column      | Meaning                                 |
+| ----------- | --------------------------------------- |
+| Backlog     | New items awaiting triage               |
+| To Do       | Accepted for the current/planned sprint |
+| In Progress | Actively being worked on                |
+| Review      | Pull request under review               |
+| Testing     | Implementation is being verified        |
+| Done        | Completed (issue closed / PR merged)    |
+
+**Custom Fields**
+
+- **Priority** — urgency of the item.
+- **Component** — affected part of the system.
+- **Estimate (hours)** — estimated effort in hours.
+
+**Automation Rules**
+
+The board uses built-in GitHub Projects workflows to keep statuses consistent:
+
+- New items added to the project automatically start in **Backlog**.
+- Closed issues and merged pull requests automatically move to **Done**.
+- Reopened issues automatically return to **Backlog** for re‑triage.
+- When a reviewer requests changes on a PR, its status moves back to **In Progress**.
+- Closed items that have not been updated for one month are auto‑archived to keep the board clean.
+
+---
+
 Copyright © 2026 ViktorAH14
