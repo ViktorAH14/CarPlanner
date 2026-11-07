@@ -195,10 +195,6 @@ We welcome contributions!
 
 Please follow the [Conventional Commits](https://www.conventionalcommits.org/) style for commit messages.
 
-**License:** MIT — see [LICENSE](./LICENSE).
-
-Read this documentation in Russian: [README_RU.md](./README_RU.md)
-
 ---
 
 ## 🎯 Project Management
@@ -233,6 +229,12 @@ The board uses built-in GitHub Projects workflows to keep statuses consistent:
 - Reopened issues automatically return to **Backlog** for re‑triage.
 - When a reviewer requests changes on a PR, its status moves back to **In Progress**.
 - Closed items that have not been updated for one month are auto‑archived to keep the board clean.
+
+---
+
+**License:** MIT — see [LICENSE](./LICENSE).
+
+Read this documentation in Russian: [README_RU.md](./README_RU.md)
 
 ---
 
