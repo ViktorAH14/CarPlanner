@@ -37,23 +37,24 @@ CarPlanner/
 │   └── package.json
 ├── frontend/                             # Frontend source code (Flutter)
 │   ├── lib/                              # Flutter packages
-│       ├── main.dart                     # Entry point of the CarPlanner application
+│   │   ├── main.dart                     # Entry point of the CarPlanner application
 │   │   ├── app.dart                      # Root widget and app configuration
 │   │   └── features/
 │   │       └── home/
-│   │           └── presentetion/
+│   │           └── presentation/         # Fixed typo: was 'presentetion'
 │   │               └── home_screen.dart  # Main dashboard with stats cards and action
 │   ├── test/                             # Flutter tests (Flutter Test)
 │   │   └── home_screen_test.dart         # Widget tests for HomeScreen
 │   ├── pubspec.yaml                      # Flutter project configuration
-│   └── pubspec.loc
+│   └── pubspec.lock                     # Fixed typo: was 'pubspec.loc'
 ├── docker/
 │   └── postgres/
 │       └── init-test-db.sql              # Creates carplanner_test_db on first DB init
 ├── docker-compose.yml                    # Container orchestration
 ├── .env.example                          # Environment variables template
+├── CONTRIBUTING.md                       # Contribution guide
 ├── README.md                             # This documentation (English)
-├── README_RU.md                          # Documentation in Russian
+├── README_RU.md                           # Documentation in Russian
 └── LICENSE                               # MIT License
 ```
 
@@ -65,20 +66,20 @@ The frontend implements a clean feature-based architecture with a Material 3 UI
 
 **Key Features**
 
-- **Home Screen** (lib/features/home/presentation/home_screen.dart): Displays a descriptive header, three statistic cards (Fuel, Service, Repair and other things), and an “Add record” action button.
-- **Responsive Layout:** Uses SingleChildScrollView to ensure proper rendering on different screen sizes.
-- **Material 3 Design:** Applies ThemeData(useMaterial3: true) with a seed color for a consistent visual style.
-- **Widget Tests:** Includes comprehensive widget tests in test/home_screen_test.dart verifying UI rendering and interaction (e.g., SnackBar display on button press).
-- **Documentation Ready:** All public classes and methods include DartDocs comments (///) compatible with dart doc generation.
+- **Home Screen** (`lib/features/home/presentation/home_screen.dart`): Displays a descriptive header, three statistic cards (Fuel, Service, Repair and other things), and an “Add record” action button.
+- **Responsive Layout:** Uses `SingleChildScrollView` to ensure proper rendering on different screen sizes.
+- **Material 3 Design:** Applies `ThemeData(useMaterial3: true)` with a seed color for a consistent visual style.
+- **Widget Tests:** Includes comprehensive widget tests in `test/home_screen_test.dart` verifying UI rendering and interaction (e.g., SnackBar display on button press).
+- **Documentation Ready:** All public classes and methods include Dart doc comments (`///`) compatible with `dart doc` generation.
 
 **How to Generate Frontend Documentation**
-From the frontend/ directory, run:
+From the `frontend/` directory, run:
 
 ```bash
 dart doc --open
 ```
 
-This generetes HTML documentation in CarPlanner/frontend/doc/api and opens it in your brouser.
+This generates HTML documentation in `CarPlanner/frontend/doc/api` and opens it in your browser.
 
 ---
 
@@ -140,7 +141,7 @@ cd frontend
 flutter test
 ```
 
-All widget tests (e.g., test/home_screen_test.dart) must pass before merging any frontend changes.
+All widget tests (e.g., `test/home_screen_test.dart`) must pass before merging any frontend changes.
 
 ---
 
@@ -177,21 +178,14 @@ The authentication module is fully implemented and tested. Login returns a signe
 
 ## 🤝 Contributing
 
-We welcome contributions!
+We welcome contributions! Please read our [CONTRIBUTING.md](./CONTRIBUTING.md) for setup instructions, branch naming convention, commit style, and the PR workflow.
 
-1. Create an issue to discuss your idea or bug.
-2. Fork the repo, create a branch (`feature/your-feature-name`).
-3. Make changes and ensure all tests pass:
+Quick start:
 
-   ```bash
-   # Backend
-   docker compose run --rm backend npm run test
-
-   # Frontend
-   cd frontend && flutter test
-   ```
-
-4. Submit a Pull Request.
+1. Check the [Sprint Board](https://github.com/users/ViktorAH14/projects/4) and open an issue using a template.
+2. Fork the repo and create a branch following the naming rule: `type/<issue#>-<short-name>` (e.g. `task/12-create-pr-templates`).
+3. Ensure all tests pass (see [CONTRIBUTING.md](./CONTRIBUTING.md) for commands).
+4. Submit a Pull Request using the matching PR template.
 
 Please follow the [Conventional Commits](https://www.conventionalcommits.org/) style for commit messages.
 
