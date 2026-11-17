@@ -41,7 +41,7 @@ flutter test
 Every branch must reference an issue number. Create the issue **before** opening a PR, and name the branch accordingly:
 
 - `feature/<issue#>-<short-name>` — new features (e.g. `feature/12-fuel-stats-chart`)
-- `task/<issue#>-<short-name>` — refactoring, cleanup, small fixes (e.g. `task/12-create-pr-templates`)
+- `task/<issue#>-<short-name>` — refactoring, cleanup, small fixes (e.g. `task/14-implement-versioning-changelog`)
 - `bugfix/<issue#>-<short-name>` — bug fixes (e.g. `bugfix/7-fix-snackbar-on-add-record`)
 - `docs/<issue#>-<short-name>` — documentation changes (e.g. `docs/5-update-api-docs`)
 
@@ -66,6 +66,73 @@ feat(backend): add fuel consumption calculation endpoint
 fix(frontend): correct SnackBar display on Add record press
 docs(readme): update API documentation for auth module
 ```
+
+Breaking changes must be signaled in the commit itself — see
+[Versioning & Releases](#-versioning--releases) below.
+
+## 🔖 Versioning & Releases
+
+The project follows [Semantic Versioning](https://semver.org/): `MAJOR.MINOR.PATCH`.
+
+While the version is `0.x`, the public API is considered unstable — breaking
+changes are allowed between minor releases. Once the API stabilizes, the project
+will graduate to `1.0.0`.
+
+### What Bumps What
+
+| Change type                  | Example                                            | Version bump                          |
+| ---------------------------- | -------------------------------------------------- | ------------------------------------- |
+| Breaking change              | Changed request/response contract of `/api/auth/*` | **MINOR** while `0.x`, then **MAJOR** |
+| New feature                  | New fuel statistics endpoint, new UI screen        | **MINOR**                             |
+| Bug fix (no contract change) | Fixed SnackBar display, fixed migration bug        | **PATCH**                             |
+
+### Signaling Breaking Changes
+
+Use Conventional Commits markers so breaking changes are never lost:
+
+```text
+feat!: rename POST /api/protected/data to /api/protected/records
+
+BREAKING CHANGE: the endpoint path changed; update all clients.
+```
+
+Either the `!` after the type (`feat!:`) or the `BREAKING CHANGE:` footer in
+the commit body signals a breaking change. Use at least one of them.
+
+### Changelog Mapping
+
+- Map commit types to changelog sections: `feat` → **Added**, `fix` → **Fixed**,
+  anything marked as a breaking change → **Changed**.
+- Changes not intended for end users (internal refactoring, docs, CI) usually
+  stay out of the changelog.
+
+## 🤖 Release Automation
+
+Releases are automated with [release-please](https://github.com/googleapis/release-please):
+
+- The GitHub Action (`.github/workflows/release.yml`) watches `main` for
+  Conventional Commits and maintains one Release PR per component.
+- When a Release PR is merged, the tool bumps the version (`backend/package.json`
+  or `frontend/pubspec.yaml`), updates the component's `CHANGELOG.md`, tags the
+  release (`backend-vX.Y.Z` / `frontend-vX.Y.Z`) and creates a GitHub Release.
+- Release timing is controlled by merging (or not merging) the Release PR.
+- While the version is `0.x`, breaking changes bump the MINOR version
+  (`bump-minor-pre-major` is enabled in the release-please config).
+- Versioning is per component: the backend and the frontend have independent
+  version numbers, each bumped from its own Conventional Commits.
+
+**Never change the version number manually.** The version in
+`package.json`/`pubspec.yaml` is updated only by the Release PR. Manual edits
+desync it from `.release-please-manifest.json` and will be "reverted" by the
+next release.
+
+### Root Changelog
+
+The per-package `CHANGELOG.md` files are generated automatically by
+release-please. The root `CHANGELOG.md` is a hand-written summary of each
+release: when you merge a Release PR, add a short block there — version,
+date, key changes with links to the per-package changelogs and the
+GitHub Release. Do not duplicate full commit lists in the root file.
 
 ## 📝 Pull Requests
 
