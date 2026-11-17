@@ -34,27 +34,35 @@ CarPlanner/
 │   │   ├── services/                     # Business logic
 │   │   └── utils/                        # Shared utilities (logger)
 │   ├── tests/                            # API tests (Jest + Supertest)
-│   └── package.json
+│   └── package.json                      # Backend manifest (version managed by release-please)
 ├── frontend/                             # Frontend source code (Flutter)
 │   ├── lib/                              # Flutter packages
 │   │   ├── main.dart                     # Entry point of the CarPlanner application
 │   │   ├── app.dart                      # Root widget and app configuration
 │   │   └── features/
 │   │       └── home/
-│   │           └── presentation/         # Fixed typo: was 'presentetion'
-│   │               └── home_screen.dart  # Main dashboard with stats cards and action
+│   │           └── presentation/         # Home feature UI layer
+│   │               └── home_screen.dart  # Main dashboard with stats cards and actions
 │   ├── test/                             # Flutter tests (Flutter Test)
 │   │   └── home_screen_test.dart         # Widget tests for HomeScreen
-│   ├── pubspec.yaml                      # Flutter project configuration
-│   └── pubspec.lock                     # Fixed typo: was 'pubspec.loc'
+│   ├── pubspec.yaml                      # Flutter project configuration (version managed by release-please)
+│   └── pubspec.lock                      # Dependency lock file
 ├── docker/
 │   └── postgres/
 │       └── init-test-db.sql              # Creates carplanner_test_db on first DB init
+├── .github/
+│   ├── ISSUE_TEMPLATE/                   # Issue templates (bug, feature, task, test, security, docs, performance)
+│   ├── PULL_REQUEST_TEMPLATE/            # PR templates (default + typed variants)
+│   └── workflows/
+│       └── release.yml                   # Release automation (release-please)
 ├── docker-compose.yml                    # Container orchestration
 ├── .env.example                          # Environment variables template
+├── release-please-config.json            # Release-please configuration (per-component releases)
+├── .release-please-manifest.json         # Last released version of each component
+├── CHANGELOG.md                          # Hand-written release summary (root)
 ├── CONTRIBUTING.md                       # Contribution guide
 ├── README.md                             # This documentation (English)
-├── README_RU.md                           # Documentation in Russian
+├── README_RU.md                          # Documentation in Russian
 └── LICENSE                               # MIT License
 ```
 
@@ -62,17 +70,18 @@ CarPlanner/
 
 ## 📱 Frontend Highlights (Current State)
 
-The frontend implements a clean feature-based architecture with a Material 3 UI and full test coverage for the main dashboard.
+The frontend implements a clean feature-based architecture with a Material 3 UI and full test coverage for the main dashboard.
 
 **Key Features**
 
-- **Home Screen** (`lib/features/home/presentation/home_screen.dart`): Displays a descriptive header, three statistic cards (Fuel, Service, Repair and other things), and an “Add record” action button.
+- **Home Screen** (`lib/features/home/presentation/home_screen.dart`): Displays a descriptive header, three statistic cards (Fuel, Service, Repair and other things), and an "Add record" action button.
 - **Responsive Layout:** Uses `SingleChildScrollView` to ensure proper rendering on different screen sizes.
-- **Material 3 Design:** Applies `ThemeData(useMaterial3: true)` with a seed color for a consistent visual style.
+- **Material 3 Design:** Applies `ThemeData(useMaterial3: true)` with a seed color for a consistent visual style.
 - **Widget Tests:** Includes comprehensive widget tests in `test/home_screen_test.dart` verifying UI rendering and interaction (e.g., SnackBar display on button press).
 - **Documentation Ready:** All public classes and methods include Dart doc comments (`///`) compatible with `dart doc` generation.
 
 **How to Generate Frontend Documentation**
+
 From the `frontend/` directory, run:
 
 ```bash
@@ -176,9 +185,31 @@ The authentication module is fully implemented and tested. Login returns a signe
 
 ---
 
+## 📦 Versioning & Releases
+
+The project follows [Semantic Versioning](https://semver.org/) with **per-component versions**: the backend and the frontend are released and versioned independently.
+
+- Backend: version lives in `backend/package.json`, release tags look like `backend-vX.Y.Z`
+- Frontend: version lives in `frontend/pubspec.yaml`, release tags look like `frontend-vX.Y.Z`
+
+Releases are automated with [release-please](https://github.com/googleapis/release-please):
+
+- `feat` and `fix` commits merged into `main` trigger a Release PR per component.
+- Merging the Release PR bumps the version, updates the component's `CHANGELOG.md`, tags the release, and creates a GitHub Release.
+- While the version is `0.x`, breaking changes bump the MINOR version; once the API stabilizes, the project graduates to `1.0.0`.
+
+**Changelog layout:**
+
+- `backend/CHANGELOG.md` and `frontend/CHANGELOG.md` are generated automatically from Conventional Commits — do not edit them manually.
+- The root [`CHANGELOG.md`](./CHANGELOG.md) is a hand-written summary of each release.
+
+**Never change version numbers manually** in `package.json` or `pubspec.yaml` — the version is updated only by the Release PR. See [CONTRIBUTING.md](./CONTRIBUTING.md), "Versioning & Releases", for details on breaking changes and commit conventions.
+
+---
+
 ## 🤝 Contributing
 
-We welcome contributions! Please read our [CONTRIBUTING.md](./CONTRIBUTING.md) for setup instructions, branch naming convention, commit style, and the PR workflow.
+We welcome contributions! Please read our [CONTRIBUTING.md](./CONTRIBUTING.md) for setup instructions, branch naming convention, commit style, versioning, and the PR workflow.
 
 Quick start:
 
@@ -220,9 +251,9 @@ The board uses built-in GitHub Projects workflows to keep statuses consistent:
 
 - New items added to the project automatically start in **Backlog**.
 - Closed issues and merged pull requests automatically move to **Done**.
-- Reopened issues automatically return to **Backlog** for re‑triage.
+- Reopened issues automatically return to **Backlog** for re-triage.
 - When a reviewer requests changes on a PR, its status moves back to **In Progress**.
-- Closed items that have not been updated for one month are auto‑archived to keep the board clean.
+- Closed items that have not been updated for one month are auto-archived to keep the board clean.
 
 ---
 

@@ -34,24 +34,32 @@ CarPlanner/
 │   │   ├── services/                     # Бизнес-логика
 │   │   └── utils/                        # Общие утилиты (логгер)
 │   ├── tests/                            # API-тесты (Jest + Supertest)
-│   └── package.json
+│   └── package.json                      # Манифест бэкенда (версией управляет release-please)
 ├── frontend/                             # Исходный код фронтенда (Flutter)
 │   ├── lib/                              # Пакеты Flutter
 │   │   ├── main.dart                     # Точка входа приложения CarPlanner
 │   │   ├── app.dart                      # Корневой виджет и конфигурация приложения
 │   │   └── features/
 │   │       └── home/
-│   │           └── presentation/
+│   │           └── presentation/         # UI-слой фичи Home
 │   │               └── home_screen.dart  # Главный экран: карточки статистики и действия
 │   ├── test/                             # Тесты Flutter (Flutter Test)
 │   │   └── home_screen_test.dart         # Виджет-тесты для HomeScreen
-│   ├── pubspec.yaml                      # Конфигурация Flutter-проекта
-│   └── pubspec.lock
+│   ├── pubspec.yaml                      # Конфигурация Flutter-проекта (версией управляет release-please)
+│   └── pubspec.lock                      # Файл фиксации зависимостей
 ├── docker/
 │   └── postgres/
 │       └── init-test-db.sql              # Создаёт carplanner_test_db при первой инициализации БД
+├── .github/
+│   ├── ISSUE_TEMPLATE/                   # Шаблоны issue (bug, feature, task, test, security, docs, performance)
+│   ├── PULL_REQUEST_TEMPLATE/            # Шаблоны PR (базовый + типизированные варианты)
+│   └── workflows/
+│       └── release.yml                   # Автоматизация релизов (release-please)
 ├── docker-compose.yml                    # Оркестрация контейнеров
 ├── .env.example                          # Шаблон переменных окружения
+├── release-please-config.json            # Конфигурация release-please (пер-компонентные релизы)
+├── .release-please-manifest.json         # Последняя выпущенная версия каждого компонента
+├── CHANGELOG.md                          # Ручная сводка релизов (корневой)
 ├── CONTRIBUTING.md                       # Руководство для контрибьюторов
 ├── README.md                             # Документация на английском
 ├── README_RU.md                          # Эта документация (на русском)
@@ -73,6 +81,7 @@ CarPlanner/
 - **Готовность к документированию:** все публичные классы и методы снабжены комментариями Dart doc (`///`), совместимыми с генерацией `dart doc`.
 
 **Как сгенерировать документацию фронтенда**
+
 Из каталога `frontend/` выполните:
 
 ```bash
@@ -176,9 +185,31 @@ flutter test
 
 ---
 
+## 📦 Версионирование и релизы
+
+Проект следует [Semantic Versioning](https://semver.org/) с **пер-компонентными версиями**: бэкенд и фронтенд версионируются и релизятся независимо друг от друга.
+
+- Бэкенд: версия хранится в `backend/package.json`, теги релизов имеют вид `backend-vX.Y.Z`
+- Фронтенд: версия хранится в `frontend/pubspec.yaml`, теги релизов имеют вид `frontend-vX.Y.Z`
+
+Релизы автоматизированы с помощью [release-please](https://github.com/googleapis/release-please):
+
+- Коммиты `feat` и `fix`, влитые в `main`, запускают создание Release PR для каждого компонента.
+- Мерж Release PR поднимает версию, обновляет `CHANGELOG.md` компонента, ставит тег и создаёт GitHub Release.
+- Пока версия в диапазоне `0.x`, ломающие изменения поднимают MINOR; после стабилизации API проект перейдёт на `1.0.0`.
+
+**Схема changelog:**
+
+- `backend/CHANGELOG.md` и `frontend/CHANGELOG.md` генерируются автоматически из Conventional Commits — не редактируйте их вручную.
+- Корневой [`CHANGELOG.md`](./CHANGELOG.md) — это рукописная сводка по каждому релизу.
+
+**Никогда не меняйте версии вручную** в `package.json` или `pubspec.yaml` — версия обновляется только Release PR. Подробности о ломающих изменениях и правилах коммитов — в [CONTRIBUTING.md](./CONTRIBUTING.md), раздел «Versioning & Releases».
+
+---
+
 ## 🤝 Участие в проекте
 
-Мы рады любому вкладу! Прочитайте наше [CONTRIBUTING.md](./CONTRIBUTING.md): там описаны настройка окружения, правила именования веток, стиль коммитов и процесс Pull Request.
+Мы рады любому вкладу! Прочитайте наше [CONTRIBUTING.md](./CONTRIBUTING.md): там описаны настройка окружения, правила именования веток, стиль коммитов, версионирование и процесс Pull Request.
 
 Кратко:
 
