@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon --inspect=0.0.0.0:9229 src/server.js",
     "test": "NODE_ENV=test JWT_SECRET=dummy_secret jest",
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "lint": "eslint ."
   },
   "keywords": [
     "nodejs",
