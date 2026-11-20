@@ -15,6 +15,43 @@ While the version is `0.x`, the API is considered unstable; see
 
 ## [Unreleased]
 
+- Nothing yet. Next changes will be summarized here after the next release.
+
+---
+
+## [0.2.0] - 2026-11-17
+
+### Highlights
+
+- **Release automation refined:** `release-please` now scopes releases by package path (`backend/` and `frontend/`). Root-level commits (docs, configs, workflows) no longer trigger component releases, reducing noise in changelogs and unnecessary version bumps.
+- **Path-based scoping implemented:** added `"path"` fields in `release-please-config.json` so that only relevant package directories affect their own versions and changelogs.
+- **Root CHANGELOG updated:** clarified roles of root vs. per-package changelogs; added comparison links for quick diff review.
+
+### Backend (backend-v0.2.0)
+
+- **Auth module:** added JWT middleware and protected routes.
+- **Token flow:** implemented JWT token generation and integrated with existing auth flow.
+- **Minimal config:** added basic configuration and user registration setup.
+- **Tests:** stabilized DB sync races and simplified Docker environment.
+
+### Frontend (frontend-v0.2.0)
+
+- **Home screen:** implemented `HomeScreen` with stats cards and action button.
+- **UI components:** added simple layout with responsive stats cards.
+- **Testing:** added widget tests for the new home screen.
+
+### Infrastructure & Docs
+
+- **Config update:** added path scoping to `release-please-config.json`.
+- **Documentation:** updated `CONTRIBUTING.md` with release scope rules; clarified root changelog purpose.
+
+### Comparison Links
+
+- Backend: [Compare backend-v0.1.0...backend-v0.2.0](https://github.com/ViktorAH14/CarPlanner/compare/backend-v0.1.0...backend-v0.2.0)
+- Frontend: [Compare frontend-v0.1.0...frontend-v0.2.0](https://github.com/ViktorAH14/CarPlanner/compare/frontend-v0.1.0...frontend-v0.2.0)
+
+---
+
 ## [0.1.0] - 2026-11-17
 
 First working state of the project. Versioning starts at `0.1.0` because the
@@ -35,6 +72,3 @@ surface stabilizes.
 ### Fixed
 
 - Typos in `README.md` (`presentation/`, `pubspec.lock`, `generates`, `browser`) (#12).
-
-[Unreleased]: https://github.com/ViktorAH14/CarPlanner/compare/HEAD...HEAD
-[0.1.0]: https://github.com/ViktorAH14/CarPlanner/compare/HEAD...backend-v0.1.0
