@@ -20,7 +20,7 @@ const bcrypt = require('bcryptjs');
  * Defines the User model in Sequelize.
  * Includes schema definition and instance methods for authentication logic.
  *
- * @type {import('sequelize').Model}
+ * @type {Model}
  */
 const User = sequelize.define(
   'User',

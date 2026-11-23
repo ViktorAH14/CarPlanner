@@ -12,8 +12,8 @@ const authService = require('../services/auth.service');
  * Handles user registration POST request.
  * Creates a new user and returns 201 Created.
  *
- * @param {import('express').Request} req - Express request object.
- * @param {import('express').Response} res - Express response object.
+ * @param {Request} req - Express request object.
+ * @param {Response} res - Express response object.
  */
 exports.register = async (req, res) => {
   try {
@@ -62,8 +62,8 @@ exports.register = async (req, res) => {
  * Handles user login POST request.
  * Verifies credentials and returns user data with JWT token.
  *
- * @param {import('express').Request} req - Express request object.
- * @param {import('express').Response} res - Express response object.
+ * @param {Request} req - Express request object.
+ * @param {Response} res - Express response object.
  */
 exports.login = async (req, res) => {
   try {

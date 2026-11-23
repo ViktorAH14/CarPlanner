@@ -60,6 +60,10 @@ notes.md
 /backend/coverage/
 /backend/.nyc_output/
 
+# JSDoc generated documentation
+docs/
+!docs/.keep
+
 # ==========================
 # Frontend (Flutter)
 # ==========================

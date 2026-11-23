@@ -16,7 +16,7 @@ const authRoutes = require('./routes/auth.routes');
 
 /**
  * Creates the main Express application instance.
- * @type {import('express').Application}
+ * @type {Express}
  */
 const app = express();
 
@@ -58,9 +58,9 @@ console.log(
  * Must be the last middleware in the chain.
  *
  * @param {Error} err - The error object thrown.
- * @param {import('express').Request} req - Express request object.
- * @param {import('express').Response} res - Express response object.
- * @param {import('express').NextFunction} next - Next function (not used here).
+ * @param {Request} req - Express request object.
+ * @param {Response} res - Express response object.
+ * @param {NextFunction} next - Next function (not used here).
  * @returns {void}
  */
 app.use((err, req, res, next) => {
@@ -104,7 +104,6 @@ app.use((err, req, res, next) => {
  * Exports the configured Express application instance.
  * Used by bin/www or server.js to actually listen on a port.
  *
- * @exports
- * @type {import('express').Application}
+ * @type {Express}
  */
 module.exports = app;

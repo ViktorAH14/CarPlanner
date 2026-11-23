@@ -24,9 +24,9 @@ const ERRORS = {
  *
  * Expected Header Format: Authorization: Bearer <token>
  *
- * @param {import('express').Request} req - Express request object.
- * @param {import('express').Response} res - Express response object.
- * @param {import('express').NextFunction} next - Next middleware function.
+ * @param {Request} req - Express request object.
+ * @param {Response} res - Express response object.
+ * @param {NextFunction} next - Next middleware function.
  * @returns {void}
  */
 const authenticateToken = (req, res, next) => {

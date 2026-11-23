@@ -62,7 +62,6 @@ const sequelize = new Sequelize(dbUrl, {
  * Exports the configured Sequelize instance.
  * Import this module as: const { sequelize } = require('../config/database');
  *
- * @exports
  * @type {{ sequelize: Sequelize }}
  */
 module.exports = { sequelize };
