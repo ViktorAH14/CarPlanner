@@ -54,11 +54,11 @@ jobs:
         env:
           PGPASSWORD: postgres
 
-      - name: Test
+      - name: Test with coverage
         working-directory: ./backend
         env:
           DATABASE_URL: postgresql://postgres:postgres@localhost:5432/carplanner_db
           TEST_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/carplanner_test_db
           NODE_ENV: test
           JWT_SECRET: dummy_secret
-        run: npm test
+        run: npm run test:coverage
