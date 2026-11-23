@@ -1,0 +1,18 @@
+{
+  "source": {
+    "include": ["src"],
+    "excludePattern": ".*/node_modules/.*"
+  },
+  "opts": {
+    "destination": "docs/jsdoc",
+    "recurse": true,
+    "readme": "../README.md"
+  },
+  "templates": {
+    "default": {
+      "outputSourceFiles": true,
+      "useLongnameInNav": true,
+      "systemName": "CarPlanner Backend"
+    }
+  }
+}

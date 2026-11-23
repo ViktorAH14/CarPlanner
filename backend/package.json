@@ -4,14 +4,15 @@
   "description": "Backend for CarPlanner expense tracker with PostgreSQL",
   "main": "server.js",
   "scripts": {
-  "dev": "nodemon --inspect=0.0.0.0:9229 src/server.js",
-  "test": "NODE_ENV=test JWT_SECRET=dummy_secret jest",
-  "test:coverage": "NODE_ENV=test JWT_SECRET=dummy_secret jest --coverage",
-  "start": "node src/server.js",
-  "lint": "eslint .",
-  "format": "prettier --write \"src/**/*.{js,cjs,mjs}\"",
-  "check-format": "prettier --check \"src/**/*.{js,cjs,mjs}\""
-},
+    "dev": "nodemon --inspect=0.0.0.0:9229 src/server.js",
+    "test": "NODE_ENV=test JWT_SECRET=dummy_secret jest",
+    "test:coverage": "NODE_ENV=test JWT_SECRET=dummy_secret jest --coverage",
+    "start": "node src/server.js",
+    "lint": "eslint .",
+    "format": "prettier --write \"src/**/*.{js,cjs,mjs}\"",
+    "check-format": "prettier --check \"src/**/*.{js,cjs,mjs}\"",
+    "generate:docs": "jsdoc -c jsdoc.json"
+  },
   "keywords": [
     "nodejs",
     "express",
@@ -38,6 +39,7 @@
     "eslint-config-prettier": "^10.1.8",
     "globals": "^17.6.0",
     "jest": "^30.4.2",
+    "jsdoc": "^4.0.5",
     "nodemon": "^3.1.14",
     "prettier": "^3.8.4",
     "supertest": "^7.2.2",

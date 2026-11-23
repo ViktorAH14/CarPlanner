@@ -62,3 +62,14 @@ jobs:
           NODE_ENV: test
           JWT_SECRET: dummy_secret
         run: npm run test:coverage
+
+      - name: Generate JSDoc HTML documentation
+        working-directory: ./backend
+        run: npm run generate:docs
+
+      - name: Upload JSDoc artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: jsdoc-docs
+          path: backend/docs/jsdoc
+          retention-days: 7
