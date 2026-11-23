@@ -47,6 +47,22 @@ jobs:
         working-directory: ./backend
         run: npm run lint
 
+      - name: Wait for Postgres to be ready
+        working-directory: ./backend
+        run: |
+          for i in {1..30}; do
+            if psql -h localhost -U postgres -d carplanner_db -c '\l' > /dev/null 2>&1; then
+              echo "✅ Postgres is ready."
+              break
+            fi
+            echo "⏳ Waiting for Postgres..."
+            sleep 2
+          done
+          if ! psql -h localhost -U postgres -d carplanner_db -c '\l' > /dev/null 2>&1; then
+            echo "❌ Postgres never became ready."
+            exit 1
+          fi
+
       - name: Create test database
         working-directory: ./backend
         run: |
@@ -63,9 +79,25 @@ jobs:
           JWT_SECRET: dummy_secret
         run: npm run test:coverage
 
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: backend/coverage
+          retention-days: 7
+
       - name: Generate JSDoc HTML documentation
         working-directory: ./backend
         run: npm run generate:docs
+
+      - name: Validate JSDoc output
+        working-directory: ./backend
+        run: |
+          if [ ! -f "docs/jsdoc/index.html" ]; then
+            echo "❌ Error: index.html not found in docs/jsdoc. Documentation generation failed."
+            exit 1
+          fi
+          echo "✅ docs/jsdoc/index.html exists."
 
       - name: Upload JSDoc artifact
         uses: actions/upload-artifact@v4
