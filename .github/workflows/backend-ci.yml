@@ -39,13 +39,16 @@ jobs:
         working-directory: ./backend
         run: npm ci
 
+      - name: Check format with Prettier
+        working-directory: ./backend
+        run: npm run check-format
+
       - name: Lint
         working-directory: ./backend
         run: npm run lint
 
       - name: Create test database
         working-directory: ./backend
-        # Пытаемся создать базу; если уже существует — ошибка игнорируется
         run: |
           psql -h localhost -U postgres -d carplanner_db -c "CREATE DATABASE carplanner_test_db;" || true
         env:
