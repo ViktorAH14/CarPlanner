@@ -9,6 +9,21 @@ on:
 jobs:
   backend:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: carplanner_db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -28,6 +43,20 @@ jobs:
         working-directory: ./backend
         run: npm run lint
 
+      - name: Create test database
+        working-directory: ./backend
+        # Создаём carplanner_test_db прямо в запущенном Postgres
+        # Это аналог твоего docker/postgres/init-test-db.sql
+        run: |
+          psql -h localhost -U postgres -d carplanner_db -c "CREATE DATABASE IF NOT EXISTS carplanner_test_db;"
+        env:
+          PGPASSWORD: postgres
+
       - name: Test
         working-directory: ./backend
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/carplanner_db
+          TEST_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/carplanner_test_db
+          NODE_ENV: test
+          JWT_SECRET: dummy_secret
         run: npm test
