@@ -45,10 +45,9 @@ jobs:
 
       - name: Create test database
         working-directory: ./backend
+        # Пытаемся создать базу; если уже существует — ошибка игнорируется
         run: |
-          if ! psql -h localhost -U postgres -d carplaner_db -tAc "SELECT 1 FROM pg_database WHERE datname='carplanner_test_db'" | grep -q 1; then
-            psql -h localhost -U postgres -d carplaner_db -c "CREATE DATABASE carplanner_test_db;"
-          fi
+          psql -h localhost -U postgres -d carplanner_db -c "CREATE DATABASE carplanner_test_db;" || true
         env:
           PGPASSWORD: postgres
 
