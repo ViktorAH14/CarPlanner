@@ -47,22 +47,6 @@ jobs:
         working-directory: ./backend
         run: npm run lint
 
-      - name: Wait for Postgres to be ready
-        working-directory: ./backend
-        run: |
-          for i in {1..30}; do
-            if psql -h localhost -U postgres -d carplanner_db -c '\l' > /dev/null 2>&1; then
-              echo "✅ Postgres is ready."
-              break
-            fi
-            echo "⏳ Waiting for Postgres..."
-            sleep 2
-          done
-          if ! psql -h localhost -U postgres -d carplanner_db -c '\l' > /dev/null 2>&1; then
-            echo "❌ Postgres never became ready."
-            exit 1
-          fi
-
       - name: Create test database
         working-directory: ./backend
         run: |
