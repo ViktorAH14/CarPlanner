@@ -27,25 +27,25 @@ CarPlanner/
 ├── backend/                              # Исходный код бэкенда (Node.js, Express, Sequelize)
 │   ├── src/
 │   │   ├── config/                       # Конфигурация базы данных
-│   │   ├── controllers/                  # Обработчики HTTP-запросов
-│   │   ├── middleware/                   # Middleware для JWT-аутентификации
+│   │   ├── controllers/                  # Обработчики HTTP‑запросов
+│   │   ├── middleware/                   # Middleware для JWT‑аутентификации
 │   │   ├── models/                       # Модели Sequelize
-│   │   ├── routes/                       # Определения API-маршрутов
-│   │   ├── services/                     # Бизнес-логика
+│   │   ├── routes/                       # Определения API‑маршрутов
+│   │   ├── services/                    # Бизнес‑логика
 │   │   └── utils/                        # Общие утилиты (логгер)
-│   ├── tests/                            # API-тесты (Jest + Supertest)
-│   └── package.json                      # Манифест бэкенда (версией управляет release-please)
+│   ├── tests/                            # API‑тесты (Jest + Supertest)
+│   └── package.json                      # Манифест бэкенда (версией управляет release‑please)
 ├── frontend/                             # Исходный код фронтенда (Flutter)
 │   ├── lib/                              # Пакеты Flutter
 │   │   ├── main.dart                     # Точка входа приложения CarPlanner
 │   │   ├── app.dart                      # Корневой виджет и конфигурация приложения
 │   │   └── features/
 │   │       └── home/
-│   │           └── presentation/         # UI-слой фичи Home
+│   │           └── presentation/         # UI‑слой фичи Home
 │   │               └── home_screen.dart  # Главный экран: карточки статистики и действия
 │   ├── test/                             # Тесты Flutter (Flutter Test)
-│   │   └── home_screen_test.dart         # Виджет-тесты для HomeScreen
-│   ├── pubspec.yaml                      # Конфигурация Flutter-проекта (версией управляет release-please)
+│   │   └── home_screen_test.dart         # Виджет‑тесты для HomeScreen
+│   ├── pubspec.yaml                      # Конфигурация Flutter‑проекта (версией управляет release‑please)
 │   └── pubspec.lock                      # Файл фиксации зависимостей
 ├── docker/
 │   └── postgres/
@@ -54,15 +54,16 @@ CarPlanner/
 │   ├── ISSUE_TEMPLATE/                   # Шаблоны issue (bug, feature, task, test, security, docs, performance)
 │   ├── PULL_REQUEST_TEMPLATE/            # Шаблоны PR (базовый + типизированные варианты)
 │   └── workflows/
-│       └── release.yml                   # Автоматизация релизов (release-please)
+│       ├── release.yml                   # Автоматизация релизов (release‑please)
+│       └── backend-ci.yml                # CI‑пайплайн для бэкенда (тесты, линтинг, покрытие)
 ├── docker-compose.yml                    # Оркестрация контейнеров
 ├── .env.example                          # Шаблон переменных окружения
-├── release-please-config.json            # Конфигурация release-please (пер-компонентные релизы)
+├── release-please-config.json            # Конфигурация release‑please (пер‑компонентные релизы)
 ├── .release-please-manifest.json         # Последняя выпущенная версия каждого компонента
 ├── CHANGELOG.md                          # Ручная сводка релизов (корневой)
 ├── CONTRIBUTING.md                       # Руководство для контрибьюторов
 ├── README.md                             # Документация на английском
-├── README_RU.md                          # Эта документация (на русском)
+├── README_RU.md                           # Эта документация (на русском)
 └── LICENSE                               # Лицензия MIT
 ```
 
@@ -182,6 +183,46 @@ flutter test
 | ----- | ------------------------ | --------------------------------- | ------ | -------------------------------------------- |
 | GET   | `/api/protected/profile` | Возвращает пользователя из токена | 200 OK | 401 (токен отсутствует/недействителен/истёк) |
 | POST  | `/api/protected/data`    | Пример авторизованной записи      | 200 OK | 401 (токен отсутствует/недействителен/истёк) |
+
+---
+
+## 🛠 Артефакты CI и локальные проверки (бэкенд)
+
+Эти артефакты автоматически создаются GitHub Actions для каждого PR и могут быть запущены локально.
+
+- **Документация API (JSDoc).** Артефакт jsdoc‑docs содержит сгенерированные HTML‑документы в GitHub Actions.
+
+Чтобы сгенерировать локально из каталога backend:
+
+```bash
+cd backend
+npm run generate:docs
+```
+
+Результат: backend/docs/jsdoc/index.html.
+
+- **Отчёт о покрытии тестами.** Артефакт coverage‑report содержит HTML‑отчёт.
+
+Локально можно сгенерировать:
+
+```bash
+cd backend
+npm run test:coverage
+```
+
+Отчёт: backend/coverage/index.html.
+
+- **Проверки стиля (формат и линтинг).** Эти проверки запускаются в CI и рекомендуются перед коммитом.
+
+Запустите локально из backend:
+
+```bash
+cd backend
+npm run check-format
+npm run lint
+```
+
+Поддержание этих проверок в «зелёном» состоянии обеспечивает стабильное качество кода и корректность артефактов документации.
 
 ---
 

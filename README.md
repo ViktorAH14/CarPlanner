@@ -30,8 +30,8 @@ CarPlanner/
 │   │   ├── controllers/                  # HTTP request handlers
 │   │   ├── middleware/                   # JWT authentication middleware
 │   │   ├── models/                       # Sequelize models
-│   │   ├── routes/                       # API route definitions
-│   │   ├── services/                     # Business logic
+│   │   ├── routes/                      # API route definitions
+│   │   ├── services/                    # Business logic
 │   │   └── utils/                        # Shared utilities (logger)
 │   ├── tests/                            # API tests (Jest + Supertest)
 │   └── package.json                      # Backend manifest (version managed by release-please)
@@ -54,15 +54,16 @@ CarPlanner/
 │   ├── ISSUE_TEMPLATE/                   # Issue templates (bug, feature, task, test, security, docs, performance)
 │   ├── PULL_REQUEST_TEMPLATE/            # PR templates (default + typed variants)
 │   └── workflows/
-│       └── release.yml                   # Release automation (release-please)
+│       ├── release.yml                   # Release automation (release-please)
+│       └── backend-ci.yml                # CI pipeline for backend (tests, lint, coverage)
 ├── docker-compose.yml                    # Container orchestration
 ├── .env.example                          # Environment variables template
 ├── release-please-config.json            # Release-please configuration (per-component releases)
-├── .release-please-manifest.json         # Last released version of each component
-├── CHANGELOG.md                          # Hand-written release summary (root)
+├── .release-please-manifest.json          # Last released version of each component
+├── CHANGELOG.md                           # Hand-written release summary (root)
 ├── CONTRIBUTING.md                       # Contribution guide
 ├── README.md                             # This documentation (English)
-├── README_RU.md                          # Documentation in Russian
+├── README_RU.md                           # Documentation in Russian
 └── LICENSE                               # MIT License
 ```
 
@@ -182,6 +183,48 @@ The authentication module is fully implemented and tested. Login returns a signe
 | ------ | ------------------------ | --------------------------- | ------- | ----------------------------------- |
 | GET    | `/api/protected/profile` | Return user from token      | 200 OK  | 401 (missing/invalid/expired token) |
 | POST   | `/api/protected/data`    | Example authenticated write | 200 OK  | 401 (missing/invalid/expired token) |
+
+---
+
+## 🛠 CI Artifacts & Local Dev Checks (Backend)
+
+These artifacts are automatically produced by GitHub Actions for every PR and can also be run locally.
+
+- **API Documentation (JSDoc).** The jsdoc-docs artifact contains the generated HTML docs in GitHub Actions.
+
+To generate locally from the backend directory:
+
+```bash
+cd backend
+npm run generate:docs
+```
+
+Output location: backend/docs/jsdoc/index.html.
+
+- **Test Coverage Report.** The coverage-report artifact holds the HTML coverage report.
+
+Locally, you can generate it with:
+
+```bash
+cd backend
+npm run test:coverage
+```
+
+Report output: backend/coverage/index.html.
+
+- **Style Checks (Format & Lint).** These run in CI and are recommended before committing.
+
+Run locally from the backend directory:
+
+```bash
+cd backend
+npm run check-format
+npm run lint
+```
+
+Keeping these checks green ensures consistent code quality and stable documentation artifacts.
+
+Note: The backend CI pipeline is defined in .github/workflows/backend-ci.yml and includes steps for linting, formatting, unit tests, and coverage reporting.
 
 ---
 

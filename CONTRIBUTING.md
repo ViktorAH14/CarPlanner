@@ -29,12 +29,36 @@ docker compose run --rm backend npm run test
 The server runs on port 3000; the Node.js debugger is available on port 9229.
 Tests use an isolated database (`carplanner_test_db`) and recreate all tables on each run.
 
+**Optional local CI checks (run from backend/):**
+
+```bash
+cd backend
+npm run check-format      # Prettier formatting check
+npm run lint              # ESLint checks
+npm run test:coverage     # Generate coverage report
+npm run generate:docs     # Generate JSDoc HTML docs
+```
+
+Reports and docs are placed in backend/coverage/ and backend/docs/jsdoc/ respectively.
+
 ### Frontend
 
 ```bash
 cd frontend
 flutter test
 ```
+
+All widget tests (e.g., test/home_screen_test.dart) must pass before merging any frontend changes.
+
+To generate Flutter documentation:
+
+```bash
+dart doc --open
+```
+
+Output: frontend/doc/api.
+
+---
 
 ## 🌿 Branch Naming
 
@@ -143,6 +167,7 @@ GitHub Release. Do not duplicate full commit lists in the root file.
    ```bash
    # Backend
    docker compose run --rm backend npm run test
+   cd backend && npm run check-format && npm run lint
 
    # Frontend
    cd frontend && flutter test
@@ -158,6 +183,7 @@ A change is ready to merge when:
 
 - [ ] All backend and frontend tests pass.
 - [ ] New logic is covered by tests.
+- [ ] CI checks are green (format, lint, coverage, docs where applicable).
 - [ ] Public API contracts are unchanged (unless the change is explicitly a contract update).
 - [ ] Documentation is updated where relevant.
 - [ ] The PR description is complete and links the related issue.
